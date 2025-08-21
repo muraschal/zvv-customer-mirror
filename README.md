@@ -212,7 +212,7 @@ sequenceDiagram
 ```mermaid
 flowchart LR
   P[Polling Scheduler] -->|every 1-5 min| QP[/query-partners since &lt;ts&gt;/]
-  QP --> D[Diff Filter (by tkid, version, updated_at)] --> U[Upsert Engine] --> DB
+  QP --> D[Diff Filter by tkid/version/updated_at] --> U[Upsert Engine] --> DB
   U --> C[Checkpoint last_success_ts]
 ```
 
@@ -227,7 +227,7 @@ flowchart LR
 ```mermaid
 graph LR
   subgraph Adapter
-    NC[NOVA Client<br/>(mTLS, Tokens, Header)]
+    NC[NOVA Client<br/>mTLS, Tokens, Header]
   end
   subgraph SyncLayer
     IWG[Ingestion Worker]
