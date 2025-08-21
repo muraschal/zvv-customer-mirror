@@ -31,17 +31,17 @@ Wir bauen einen **eigenen, stets aktuellen ZVV‑Kundenstamm** (Golden Record) a
 ```mermaid
 flowchart LR
   subgraph Upstream [Upstream]
-    NOVA[NOVA Customer API\nREST/OAS]
+    NOVA[NOVA Customer API<br/>REST/OAS]
   end
   subgraph Mirror [ZVV Customer Mirror]
-    IWG[Ingestion Worker\n(Events/Polling)]
+    IWG[Ingestion Worker<br/>(Events/Polling)]
     Q[Raw Queue / DLQ]
     TR[Transformer/Validator]
-    UPS[Upsert Engine\nSCD2]
-    DB[(Mirror DB\nPostgreSQL/BigQuery)]
+    UPS[Upsert Engine<br/>SCD2]
+    DB[(Mirror DB<br/>PostgreSQL/BigQuery)]
     PV[Projections/Views]
-    OB[Outbox\n(change events)]
-    API[Read API\n(BFF for CRM/Marketing)]
+    OB[Outbox<br/>(change events)]
+    API[Read API<br/>(BFF for CRM/Marketing)]
   end
   subgraph Downstream [Downstream]
     CRM[CRM]
@@ -127,7 +127,6 @@ erDiagram
   CUSTOMER_HISTORY {
     uuid id PK
     uuid customer_id FK
-    ... all mutable fields ...
     timestamptz valid_from
     timestamptz valid_to
     boolean is_current
@@ -212,7 +211,7 @@ sequenceDiagram
 ### 5.3 Fallback: Polling (Inkrementell)
 ```mermaid
 flowchart LR
-  P[Polling Scheduler] -->|every 1-5 min| QP[/query-partners since <ts>/]
+  P[Polling Scheduler] -->|every 1-5 min| QP[/query-partners since &lt;ts&gt;/]
   QP --> D[Diff Filter (by tkid, version, updated_at)] --> U[Upsert Engine] --> DB
   U --> C[Checkpoint last_success_ts]
 ```
@@ -228,7 +227,7 @@ flowchart LR
 ```mermaid
 graph LR
   subgraph Adapter
-    NC[NOVA Client\n(mTLS, Tokens, Header)]
+    NC[NOVA Client<br/>(mTLS, Tokens, Header)]
   end
   subgraph SyncLayer
     IWG[Ingestion Worker]
