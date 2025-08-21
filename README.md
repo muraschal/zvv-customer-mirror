@@ -34,14 +34,14 @@ flowchart LR
     NOVA[NOVA Customer API<br/>REST/OAS]
   end
   subgraph Mirror [ZVV Customer Mirror]
-    IWG[Ingestion Worker<br/>(Events/Polling)]
+    IWG[Ingestion Worker<br/>Events/Polling]
     Q[Raw Queue / DLQ]
     TR[Transformer/Validator]
     UPS[Upsert Engine<br/>SCD2]
     DB[(Mirror DB<br/>PostgreSQL/BigQuery)]
     PV[Projections/Views]
-    OB[Outbox<br/>(change events)]
-    API[Read API<br/>(BFF for CRM/Marketing)]
+    OB[Outbox<br/>change events]
+    API[Read API<br/>BFF for CRM/Marketing]
   end
   subgraph Downstream [Downstream]
     CRM[CRM]
